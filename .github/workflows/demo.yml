@@ -28,8 +28,7 @@ jobs:
       - name: Build website
         run: npm run build
       - name: Publish JS filename
-        #important
-        id: publish
+        id: publish #important
         run: for %f in (dist\assets\*.js) do echo script-file=%~nxf >> %GITHUB_OUTPUT%
         # run: for %f in (dist\assets\*.js) do echo %~nxf
         # powershell
