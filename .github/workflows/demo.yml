@@ -23,18 +23,23 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v4
+
       - name: Install dependencies
         run: npm ci
+
       - name: Build website
         run: npm run build
+
       - name: Publish JS filename
         id: publish #important
+        shell: cmd #important
         run: for %f in (dist\assets\*.js) do echo script-file=%~nxf >> %GITHUB_OUTPUT%
         # run: for %f in (dist\assets\*.js) do echo %~nxf
         # powershell
         # run: Get-ChildItem -Path "dist/assets" -Filter "*.js" -File | ForEach-Object { Write-Output $_.Name }
         # linux
         # run: find dist/assets/*.js -type f -execdir echo 'script-file={}' >> $GITHUB_OUTPUT';'
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -51,9 +56,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: dist-files
+
       - name: Output content
         run: ls
+
       - name: Output filename
         run: echo "${{ needs.build.outputs.script-file }}"
+        
       - name: Deploy
         run: echo "Deploying..."
