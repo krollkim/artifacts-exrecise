@@ -33,7 +33,7 @@ jobs:
       - name: Publish JS filename
         id: publish #important
         shell: cmd #important
-        run: for %f in (dist\assets\*.js) do echo script-file=%~nxf >> %GITHUB_OUTPUT%
+        run: cmd.exe /c "for %f in (dist\assets\*.js) do @echo script-file=%~nxf >> %GITHUB_OUTPUT%"
         # run: for %f in (dist\assets\*.js) do echo %~nxf
         # powershell
         # run: Get-ChildItem -Path "dist/assets" -Filter "*.js" -File | ForEach-Object { Write-Output $_.Name }
